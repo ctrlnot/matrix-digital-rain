@@ -1,18 +1,26 @@
 const SYMBOL_SIZE = 16;
 
-let symbols = [];
+let streams = [];
+let generators = [];
 
 function setup() {
   createCanvas(720, 480);
 
-  symbols.push(new Symbol(0, 0));
-  symbols.push(new Symbol(0, SYMBOL_SIZE));
+  // streams.push(new Stream(width/2, height/2, "x", streams.length));
+  generators.push(new Generator(width/2, height/2));
 }
 
 function draw() {
-  background(51);
+  background(0);
 
-  for(let symbol of symbols) {
-    symbol.run();
+  generators.forEach(generator => {
+    generator.run();
+  });
+
+  for(let i = streams.length - 1; i >= 0; i--) {
+    const s = streams[i];
+
+    s.run();
+    if(!s.isVisible()) streams.splice(i, 1);
   }
 }
