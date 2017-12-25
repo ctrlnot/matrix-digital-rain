@@ -1,13 +1,13 @@
 class Stream extends Symbol {
-  constructor(x, y, s) {
+  constructor(x, y, sym) {
     super(x, y);
-    this.symbol = s;
     this.alpha = 255;
-    this.fadeSpeed = 2;
+    this.symbol = sym;
+    this.fadeSpeed = 3;
     this._color = color(32, 194, 14, this.alpha);
   }
 
-  isVisible() {
+  getAlpha() {
     return this.alpha;
   }
 

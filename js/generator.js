@@ -1,12 +1,12 @@
 class Generator extends Symbol {
   constructor(x, y) {
     super(x, y);
-    this.speed = 2;
+    this.speed = this.generateRandomSpeed();
     this.symbol = this.generateRandomSymbol();
   }
 
   changeSymbol() {
-    if(frameCount % SYMBOL_SIZE === 0) {
+    if(frameCount % (floor(SYMBOL_SIZE / 3)) === 0) {
       this.setRandomSymbol(this.generateRandomSymbol());
     }
   }
@@ -17,8 +17,19 @@ class Generator extends Symbol {
     }
   }
 
+  generateRandomSpeed() {
+    return floor(random(2, 5));
+  }
+
+  setSpeed(speed) {
+    this.speed = speed;
+  }
+
   move() {
-    if(this.y > height) this.y = -SYMBOL_SIZE;
+    if(this.y > height) {
+      this.y = -SYMBOL_SIZE;
+      this.setSpeed(this.generateRandomSpeed());
+    }
 
     this.y += this.speed;
   }
